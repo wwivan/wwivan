@@ -23,7 +23,8 @@
           </el-form-item>
           <el-form-item label="头像">
             <el-upload class="avatar-uploader"
-                       :action="'http://localhost:3000/admin/api' +'/upload'"
+                       :action="uploadUrl"
+                       :headers="getAuthHeaders()"
                        :show-file-list="false"
                        :on-success="afterUpload">
               <img v-if="model.avatar"
@@ -110,7 +111,8 @@
               </el-form-item>
               <el-form-item label="图标">
                 <el-upload class="avatar-uploader"
-                       :action="'http://localhost:3000/admin/api' +'/upload'"
+                       :action="uploadUrl"
+                       :headers="getAuthHeaders()"
                        :show-file-list="false"
                        :on-success="res=> $set(item,'icon',res.url)">
               <img v-if="item.icon"
@@ -174,7 +176,7 @@
         this.model.avatar = await res.url;
       },
       async save() {
-        let res;
+        let res
         if (this.id) {
           res = await this.$http.put(`heroes/${this.id}`, this.model);
         } else {
