@@ -27,6 +27,11 @@
              class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
       </el-form-item>
+      <el-form-item label="详情">
+        <vue-editor v-model="model.body"
+                    useCustomImageHandler
+                    @imageAdded="handleImageAdded"></vue-editor>
+      </el-form-item>
       <el-form-item>
         <el-button type="primary"
                    native-type="submit">保存</el-button>
@@ -36,7 +41,11 @@
 </template>
 
 <script>
+  import { VueEditor } from "vue2-editor";
   export default {
+    components: {
+      VueEditor
+    },
     props: {
       id: {}
     },
@@ -47,6 +56,13 @@
       };
     },
     methods: {
+      async handleImageAdded(file, Editor, cursorLocation, resetUploader) {
+        const formData = new FormData();
+        formData.append("file", file);
+        const res = await this.$http1.post("upload", formData);
+        Editor.insertEmbed(cursorLocation, "image", res.data.url);
+        resetUploader();
+      },
       async afterUpload(res) {
         let newModel = {
           icon: res.url
