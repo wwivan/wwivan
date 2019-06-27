@@ -10,6 +10,10 @@ import HeroEdit from './views/HeroEdit.vue'
 import HeroList from './views/HeroList.vue'
 import AdminUserEdit from './views/AdminUserEdit.vue'
 import AdminUserList from './views/AdminUserList.vue'
+import AdEdit from './views/AdEdit.vue'
+import AdList from './views/AdList.vue'
+import ArticleEdit from './views/ArticleEdit.vue'
+import ArticleList from './views/ArticleList.vue'
 
 Vue.use(Router)
 
@@ -70,6 +74,19 @@ const router = new Router({
           component: HeroList
         },
         {
+          path: "/articles/create",
+          component: ArticleEdit
+        },
+        {
+          path: "/articles/edit/:id",
+          component: ArticleEdit,
+          props: true
+        },
+        {
+          path: "/articles/list",
+          component: ArticleList
+        },
+        {
           path: "/admin_users/create",
           component: AdminUserEdit
         },
@@ -81,6 +98,19 @@ const router = new Router({
         {
           path: "/admin_users/list",
           component: AdminUserList
+        },
+        {
+          path: "/ads/create",
+          component: AdEdit
+        },
+        {
+          path: "/ads/edit/:id",
+          component: AdEdit,
+          props: true
+        },
+        {
+          path: "/ads/list",
+          component: AdList
         },
       ]
     },

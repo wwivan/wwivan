@@ -29,4 +29,10 @@ const schema = new mongoose.Schema({
   }]
 })
 
-module.exports = mongoose.model('Hero',schema)
+try {//解决重复定义的问题
+  module.exports = mongoose.model('Hero', schema,'heroes')
+} catch (e) {
+  if (e.name === 'OverwriteModelError') {
+    module.exports = mongoose.model('Hero')
+  }
+}

@@ -50,9 +50,25 @@ $size in $font-sizes {
   }
 }
 
+//text overflow
+.text-ellipsis {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 //width,height
 .w-100 {
   width: 100%;
+}
+
+.w-80 {
+  width: 80%
+}
+
+.w-20 {
+  width: 20%
 }
 
 .h-100 {
@@ -155,12 +171,25 @@ $type in $spacing-types {
 
 //nav
 .nav {
+  display: flex;
+
   .nav-item {
     border-bottom: 3px solid transparent;
     padding-bottom: 0.2rem;
 
     &.active {
-      border-bottom: 3px solid #fff
+      color: map-get($map: $colors, $key: "primary");
+      border-bottom-color: map-get($colors, "primary")
+    }
+  }
+
+  &.nav-inverse {
+    .nav-item {
+      color: map-get($colors, "white");
+
+      &.active {
+        border-bottom-color: map-get($colors, "white");
+      }
     }
   }
 }
@@ -178,6 +207,13 @@ $type in $spacing-types {
   }
 
   &.sprite-arrow {
+    width: 0.7692rem;
+    height: 0.7692rem;
+    background-position: 38.577% 52.076%;
+  }
+
+  &.sprite-down-arrow {
+    transform: rotate(180deg);
     width: 0.7692rem;
     height: 0.7692rem;
     background-position: 38.577% 52.076%;

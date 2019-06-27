@@ -38,24 +38,71 @@
     <!-- end of swiper -->
     <div class="nav-icons bg-white mt-3 text-center pt-3 text-dark-1">
       <div class="d-flex flex-wrap">
-        <div class="nav-item mb-3" v-for="n in 10" :key="n">
+        <div
+          class="nav-item mb-3"
+          v-for="n in isshow === true ? 10 : 4"
+          :key="n"
+        >
           <i class="sprite sprite-news"></i>
           <div class="py-2">爆料站</div>
         </div>
       </div>
       <div class="bg-light py-2 fs-sm">
-        <i class="sprite sprite-arrow mr-1"></i>
-        <span>收起</span>
+        <i v-show="isshow" class="sprite sprite-arrow mr-1"></i>
+        <i v-show="!isshow" class="sprite sprite-down-arrow mr-1"></i>
+        <span v-show="isshow" @click="isshow = !isshow">收起</span>
+        <span v-show="!isshow" @click="isshow = !isshow">展开</span>
       </div>
     </div>
+    <!-- end of nav-icons -->
+    <m-list-card icon="menu" title="新闻资讯" :categories="newsCates">
+      <template #items="{category}">
+        <div
+          class="py-2 fs-lg d-flex"
+          v-for="(news, i) in category.newsList"
+          :key="i"
+        >
+          <span class="text-grey">[{{ news.categoryName }}]</span>
+          <span class="px-2">|</span>
+          <span class="flex-1 text-dark-1 text-ellipsis pr-2">{{
+            news.title
+          }}</span>
+          <span class="text-grey-1 fs-sm">{{ news.createdAt | date }}</span>
+        </div>
+      </template>
+    </m-list-card>
+    <m-list-card icon="card-hero" title="英雄列表" :categories="heroCates">
+      <template #items="{category}">
+        <div class="d-flex flex-wrap" style="margin:0 -0.5rem">
+          <div
+            class="p-2 text-center  w-20"
+            v-for="(hero, i) in category.heroList"
+            :key="i"
+          >
+            <img :src="hero.avatar" class="w-100" alt="" />
+            <div>{{ hero.name }}</div>
+          </div>
+        </div>
+      </template>
+    </m-list-card>
+    <m-list-card icon="menu" title="精彩视频" :categories="heroCates"> </m-list-card>
   </div>
 </template>
 
 <script>
+import dayjs from "dayjs";
 export default {
+  filters: {
+    date(val) {
+      return dayjs(val).format("MM/DD");
+    }
+  },
   name: "HelloWorld",
   data() {
     return {
+      newsCates: [],
+      heroCates: [],
+      isshow: true,
       swiperOption: {
         notNextTick: true,
         //循环
@@ -96,6 +143,20 @@ export default {
       }
       // swiperSlides: [1, 2, 3, 4]
     };
+  },
+  created() {
+    this.fetchNewsCats();
+    this.fetchHeroCats();
+  },
+  methods: {
+    async fetchNewsCats() {
+      const res = await this.$http.get("news/list");
+      this.newsCates = res.data;
+    },
+    async fetchHeroCats() {
+      const res = await this.$http.get("heroes/list");
+      this.heroCates = res.data;
+    }
   },
   computed: {
     swiper() {
