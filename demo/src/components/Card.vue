@@ -6,8 +6,8 @@
         <div class="fs-xl flex-1 px-2">{{ title }}</div>
         <i class="iconfont icon-menu1"></i>
       </div>
-      <div class="w-100">
-        <img src="../assets/images/1538459038600.jpg" class="w-100" alt="">
+      <div class="w-100 mb-2">
+        <img src="../assets/images/1538459038600.jpg" class="w-100" alt="" />
       </div>
     </div>
     <div v-else class="card-header d-flex ai-center pb-3">
@@ -34,5 +34,6 @@ export default {
   .card-header {
     border-bottom: 1px solid $border-color;
   }
+  border-bottom: 1px solid $border-color;
 }
 </style>

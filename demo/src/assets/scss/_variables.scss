@@ -1,5 +1,6 @@
 //colors
 $colors:("primary":#db9e3f,
+  "blue":#4394e4,
   "white":#fff,
   "light":#f9f9f9,
   "light-1":#d4d9de,
@@ -11,7 +12,7 @@ $colors:("primary":#db9e3f,
 );
 
 
-$border-color:map-get($colors,'light-1');
+$border-color:map-get($colors, 'light-1');
 
 //font-size
 $base-font-size:1rem;
