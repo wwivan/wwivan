@@ -134,6 +134,40 @@
             </el-col>
           </el-row>
         </el-tab-pane>
+        <el-tab-pane label="皮肤"
+                     name="skins">
+<el-button size="small"
+                     @click="model.skins.push({})">
+            <i class="el-icon-plus"></i>
+            添加皮肤
+          </el-button>
+          <el-row type="flex"
+                  style="flex-wrap:wrap">
+            <el-col :md="12"
+                    v-for="(item,i) in model.skins"
+                    :key="i">
+              <el-form-item label="名称">
+                <el-input v-model="item.name"></el-input>
+              </el-form-item>
+              <el-form-item label="图标">
+                <el-upload class="avatar-uploader"
+                       :action="uploadUrl"
+                       :headers="getAuthHeaders()"
+                       :show-file-list="false"
+                       :on-success="res=> $set(item,'skin',res.url)">
+              <img v-if="item.skin"
+                   :src="item.skin"
+                   class="avatar">
+              <i v-else
+                 class="el-icon-plus avatar-uploader-icon"></i>
+            </el-upload>
+              </el-form-item>
+              <el-form-item>
+                <el-button type="danger" size="samll" @click="model.skins.splice(i,1)">删除</el-button>
+              </el-form-item>
+            </el-col>
+          </el-row>
+        </el-tab-pane>
       </el-tabs>
       <el-form-item style="margin-top:1rem">
         <el-button type="primary"
@@ -165,7 +199,8 @@
           usageTips: "",
           battleTips: "",
           teamTips: "",
-          skills: [{}]
+          skills: [{}],
+          skins:[{}]
         },
         items: {}
         // parents: []

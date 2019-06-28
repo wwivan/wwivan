@@ -4,6 +4,7 @@ import Main from "./views/Main.vue";
 // import Home from "./views/Home.vue";
 import Home from "./views/Home1.vue";
 import Article from "./views/Article.vue";
+import Hero from "./views/Hero.vue";
 
 Vue.use(Router);
 
@@ -23,6 +24,12 @@ export default new Router({
           path: "articles/:id",
           name: "article",
           component: Article,
+          props: true
+        },
+        {
+          path: "heroes/:id",
+          name: "hero",
+          component: Hero,
           props: true
         }
       ]

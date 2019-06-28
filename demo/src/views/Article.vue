@@ -39,6 +39,11 @@ export default {
       model: null
     };
   },
+  watch: {
+    id() {
+      this.fetch();
+    }
+  },
   methods: {
     async fetch() {
       const res = await this.$http.get(`articles/${this.id}`);
@@ -49,9 +54,6 @@ export default {
     }
   },
   created() {
-    this.fetch();
-  },
-  updated() {
     this.fetch();
   }
 };
