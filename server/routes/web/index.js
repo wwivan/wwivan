@@ -6,6 +6,7 @@ module.exports = app => {
   const Article = mongoose.model('Article')
   const Hero = mongoose.model('Hero')
   const Item = mongoose.model('Item')
+  const Ad = mongoose.model('Ad')
 
   router.get("/news/init", async (req, res) => {
     const parent = await Category.findOne({
@@ -504,6 +505,12 @@ module.exports = app => {
 
   router.get('/items1/:id', async (req, res) => {
     const data = await Item.findById(req.params.id)
+    res.send(data)
+  })
+
+  //轮播图
+  router.get('/ads',async (req,res)=>{
+    const data = await Ad.find(req.body)
     res.send(data)
   })
   app.use('/web/api', router)

@@ -11,6 +11,13 @@ Vue.component("m-list-card", ListCard);
 Vue.config.productionTip = false;
 import "./assets/iconfont/iconfont.css";
 import "./assets/scss/style.scss";
+window.addEventListener(
+  "popstate",
+  function() {
+    router.isBack = true;
+  },
+  false
+);
 
 import axios from "axios";
 Vue.prototype.$http = axios.create({

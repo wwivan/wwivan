@@ -2,7 +2,7 @@
   <div class="page-article" v-if="model">
     <div class="d-flex py-3 px-2 border-bottom text-blue">
       <div class="iconfont icon-back mr-1" @click="back"></div>
-      <strong class="flex-1">
+      <strong class="flex-1 text-ellipsis">
         {{ model.title }}
       </strong>
       <div class="text-grey">

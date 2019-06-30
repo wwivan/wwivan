@@ -2,25 +2,9 @@
   <div class="scroll">
     <swiper :options="swiperOption" ref="mySwiper">
       <!-- slides -->
-      <swiper-slide>
-        <img
-          class="w-100"
-          src="../assets/images/115508ceaf06034694207114258ac83c.jpeg"
-          alt=""
-        />
+      <swiper-slide v-for="(item, i) in images" :key="i">
+        <a :href="item.url"> <img class="w-100" :src="item.image" alt=""/></a>
       </swiper-slide>
-      <swiper-slide
-        ><img
-          class="w-100"
-          src="../assets/images/57d44539c1cf5ab41c6a0290dedba253.jpeg"
-          alt=""
-      /></swiper-slide>
-      <swiper-slide
-        ><img
-          class="w-100"
-          src="../assets/images/fd2d3e636e22ff8adf769060d15fcd21.jpeg"
-          alt=""
-      /></swiper-slide>
       <div
         class="swiper-pagination pagination-home text-right px-3 pb-2"
         slot="pagination"
@@ -107,6 +91,7 @@ export default {
     return {
       newsCates: [],
       heroCates: [],
+      images: [],
       isshow: true,
       swiperOption: {
         notNextTick: true,
@@ -152,6 +137,7 @@ export default {
   created() {
     this.fetchNewsCats();
     this.fetchHeroCats();
+    this.fetchImages();
   },
   methods: {
     async fetchNewsCats() {
@@ -161,6 +147,10 @@ export default {
     async fetchHeroCats() {
       const res = await this.$http.get("heroes/list");
       this.heroCates = res.data;
+    },
+    async fetchImages() {
+      const res = await this.$http.get("ads");
+      this.images = res.data[0].items;
     }
   },
   computed: {
