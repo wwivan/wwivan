@@ -67,7 +67,7 @@
             v-for="(hero, i) in category.heroList"
             :key="i"
           >
-            <img :src="hero.avatar" class="w-100" alt="" />
+            <img v-lazy="hero.avatar" class="w-100" alt="" />
             <div>{{ hero.name }}</div>
           </router-link>
         </div>

@@ -14,7 +14,9 @@
           <router-link class="nav-link" tag="div" to="/">首页</router-link>
         </div>
         <div class="nav-item">
-          <router-link class="nav-link" tag="div" to="/">攻略中心</router-link>
+          <router-link class="nav-link" tag="div" to="/test"
+            >攻略中心</router-link
+          >
         </div>
         <div class="nav-item">
           <router-link class="nav-link" tag="div" to="/">赛事中心</router-link>

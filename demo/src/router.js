@@ -5,6 +5,7 @@ import Main from "./views/Main.vue";
 import Home from "./views/Home1.vue";
 import Article from "./views/Article.vue";
 import Hero from "./views/Hero.vue";
+import Test from "./views/Test.vue";
 
 Vue.use(Router);
 
@@ -33,6 +34,11 @@ export default new Router({
           props: true
         }
       ]
+    },
+    {
+      path: "/test",
+      name: "test",
+      component: Test
     }
   ]
 });
